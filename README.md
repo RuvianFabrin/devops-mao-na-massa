@@ -24,3 +24,8 @@ pull
 
 branch
 merge
+
+#### Ansible
+app01 - VM aplicativo Java
+db01 - VM banco de dados
+control-node - terá o ansible instalado
