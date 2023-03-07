@@ -7,7 +7,7 @@
 
   vars:
     - dbhost: "db01"
-    - dbname: "notes"
+    - dbname: "db_api_rest"
     - dbusername: "notesapp"
     - dbpassword: "devopsmaonamassa"
   tasks:    
@@ -18,16 +18,16 @@
         uid: 500
     - name: Download do Maven
       get_url: 
-        url: https://repo1.maven.org/maven2/org/apache/maven/apache-maven/3.1.0/apache-maven-3.1.0-bin.tar.gz
-        dest: /opt/apache-maven-3.1.0-bin.tar.gz
+        url: https://repo1.maven.org/maven2/org/apache/maven/apache-maven/3.9.0/apache-maven-3.9.0-bin.tar.gz
+        dest: /opt/apache-maven-3.9.0-bin.tar.gz
     - name: Unzip do pacote maven 
       ansible.builtin.unarchive:
-        src: /opt/apache-maven-3.1.0-bin.tar.gz
+        src: /opt/apache-maven-3.9.0-bin.tar.gz
         dest: /opt/
         remote_src: yes
     - name: Instalação do Java
       yum:
-        name: java-1.8.0-openjdk
+        name: java-11-openjdk
         state: latest
     - name: Criação do diretório de app
       file:
@@ -41,7 +41,7 @@
         state: latest
     - name: Clone do repositório Notes - app
       git:
-        repo: 'https://github.com/callicoder/spring-boot-mysql-rest-api-tutorial.git'
+        repo: 'https://github.com/RuvianFabrin/rest-cliente.git'
         dest: /opt/notes
         clone: yes
         force: yes
@@ -54,11 +54,11 @@
         src: application.properties
         dest: /opt/notes/src/main/resources/application.properties
     - name: Gerar pacote da Aplicação
-      command: /opt/apache-maven-3.1.0/bin/mvn -f /opt/notes/pom.xml package
+      command: /opt/apache-maven-3.9.0/bin/mvn -f /opt/notes/pom.xml package
       become_user: app
     - name: Registrar versão atual do pacote
       shell:
-        cmd: /opt/apache-maven-3.1.0/bin/mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | grep -v '\['
+        cmd: /opt/apache-maven-3.9.0/bin/mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | grep -v '\['
         chdir: /opt/notes/
       register: app_version
     - name: Configurar serviço do Systemd
@@ -71,7 +71,7 @@
       notify: reload daemon
     - name: Iniciar o serviço notes
       service:
-        name: notes
+        name: restcliente
         state: restarted
   roles:
     - configuracao-default-so

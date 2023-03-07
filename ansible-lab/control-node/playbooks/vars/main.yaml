@@ -1,6 +1,6 @@
 mysql_root_password: devopsmaonamassa
 mysql_databases:
-  - name: notes
+  - name: db_api_rest
     encoding: latin1
     collation: latin1_general_ci
 mysql_users:

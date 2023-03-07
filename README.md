@@ -1,5 +1,15 @@
 # devops-mao-na-massa
 
+#### Instalar o VBGuest
+
+vagrant plugin install vagrant-vbguest --plugin-version 0.21
+
+#### Intalar nfs no windows
+
+vagrant plugin install vagrant-winnfsd
+
+#### Comandos 
+
 Sobe a máquina: vagrant up
 
 Destroi a máquina: vagrant destroy
@@ -10,7 +20,7 @@ diretório da máquina virtual que sincroniza tudo que estiver na raiz do vagran
 
 cd /vagrant
 
-#### Git
+## Git
 
 init
 
@@ -25,9 +35,12 @@ pull
 branch
 merge
 
-#### Ansible
+## Ansible
 app01 - VM aplicativo Java
 db01 - VM banco de dados
 control-node - terá o ansible instalado
+
+## Docker
+
 
   
