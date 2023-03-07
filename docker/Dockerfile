@@ -1,4 +1,5 @@
 FROM openjdk:8-alpine
+RUN java -version
 RUN addgroup -S notes && adduser -S notes -G notes
 ENV MAVEN_VERSION 3.9.0
 ENV MAVEN_HOME /usr/lib/mvn
