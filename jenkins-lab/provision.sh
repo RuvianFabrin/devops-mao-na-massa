@@ -21,3 +21,12 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 sudo systemctl deamon-reload
 sudo systemctl restart docker
+
+# Instalar Sonar Scanner
+wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+unzip sonar-scanner-cli-4.6.2.2472-linux.zip -d /opt/
+mv /opt/sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
+chown -R sonar:sonar /opt/sonar-scanner
+echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee -a /etc/profile
+curl -sL http://rpm.nodesource.com/setup_10.x | sudo bash -
+sudo yum install nodejs -y
